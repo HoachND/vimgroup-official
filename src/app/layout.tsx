@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vimgroup.vercel.app"),
+  metadataBase: new URL("https://vimgroup.vn"),
   title: "VIMGROUP - Kiến Tạo Nền Tảng, Dẫn Dắt Tương Lai",
   description: "VIMGROUP là tập đoàn đầu tư đa ngành hàng đầu, kiến tạo hệ sinh thái toàn diện từ Công nghiệp phụ trợ, Năng lượng xanh, Thương mại đến Công nghệ AI & Tự động hóa.",
   keywords: "VIMGROUP, tập đoàn VIMGROUP, đầu tư đa ngành, công nghiệp phụ trợ, năng lượng xanh, VimSolar, VimSupply, VimAI, AI Homes, tự động hóa, chuyển đổi số",
