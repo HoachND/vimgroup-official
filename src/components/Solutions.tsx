@@ -47,7 +47,7 @@ export default function Solutions() {
       desc: isEn ? "Robust multi-channel trading network and professional global services." : "Mạng lưới thương mại đa kênh và dịch vụ chuyên nghiệp toàn cầu.",
       img: "/images/pillar-trading.jpg",
       brands: [
-        { name: "VIMGROUP Trading", link: "https://vimgroup.vn/trading" }
+        { name: "VIMGROUP Trading", link: "https://b2b.vimgroup.vn" }
       ],
       content: isEn
         ? "The Trading & Services arm of VIMGROUP bridges the gap between high-quality manufacturers and global consumers. We operate a sophisticated multi-channel distribution network that spans across domestic and international markets. Our expertise lies in supply chain management, international logistics, and strategic marketing for diverse product categories, ranging from industrial equipment to consumer lifestyle brands. VIMGROUP Trading leverages data-driven insights and AI-powered logistics to ensure efficiency and reliability in every transaction. We provide comprehensive business services, including market entry consultancy, distribution management, and after-sales support, enabling our partners to scale rapidly and sustainably. Our focus is on transparency, quality assurance, and building long-term value for all stakeholders in the global trade ecosystem."
