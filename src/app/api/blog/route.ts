@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
     seoDescription: body.seoDescription || body.excerptEn || body.excerptVi,
     seoImage: body.seoImage || "",
     tags: body.tags || [],
-    author: body.author || "VimSolar",
+    author: body.author || "VIMGROUP",
     published: body.published ?? false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),

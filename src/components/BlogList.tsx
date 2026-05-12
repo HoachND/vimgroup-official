@@ -60,7 +60,7 @@ export default function BlogList() {
                 <a href={`/blog/${post.slug}`}>
                   <div className="relative h-64 overflow-hidden">
                     <Image
-                      src={post.seoImage || "/images/banner-vimsolar.png"}
+                      src={post.seoImage || "/images/vimgroup-ecosystem.jpg"}
                       alt={isEn ? post.titleEn : post.titleVi}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"

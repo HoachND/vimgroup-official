@@ -35,20 +35,34 @@ export async function POST(req: Request) {
       throw new Error('Telegram API responded with ' + response.status);
     }
 
-    // GỬI ĐẾN GOOGLE APPS SCRIPT (Ghi Sheet + Email chào mừng)
-    const GOOGLE_APPS_SCRIPT_URL = process.env.GAS_URL || "https://script.google.com/macros/s/AKfycbzV9Qk6oALpj0e09ABB6ofj2RGKfw1fGXBvDnLe38lcg-1yB3fQNtiPohwccb0VT97v/exec";
+    // GỬI ĐẾN GOOGLE APPS SCRIPT DỰ ÁN (VIMGROUP V2 Sheet + Email chào mừng)
+    const PROJECT_GAS_URL = process.env.GAS_URL || "https://script.google.com/macros/s/AKfycbzV9Qk6oALpj0e09ABB6ofj2RGKfw1fGXBvDnLe38lcg-1yB3fQNtiPohwccb0VT97v/exec";
+    
+    // GỬI ĐẾN GOOGLE APPS SCRIPT TỔNG (0.0.TOTAL DATA CUSTOMER_VIMGROUP_2026)
+    const GLOBAL_GAS_URL = "https://script.google.com/macros/s/AKfycbzVK3sPVnbDfcRxk8n_5vi-gRU2X_1GTXVHuU8kcrk6Kfk3wkpqKRDJACtb3msUFRm6/exec";
+    const GLOBAL_SHEET_ID = "1LAtBjiRbwTxt7qu9XSYwzbVMNYBvC6guq-Zv_Yp3Cf0";
 
     try {
-      await fetch(GOOGLE_APPS_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({
-          ...data,
-          source: "vimgroup.vn - Corporate Website"
+      await Promise.all([
+        // Gửi cho dự án
+        fetch(PROJECT_GAS_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ ...data, source: "vimgroup.vn - Corporate Website" }),
         }),
-      });
+        // Gửi cho Database Tổng VIMGROUP
+        fetch(GLOBAL_GAS_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ 
+            ...data, 
+            source: "vimgroup.vn (contact-form)",
+            targetSheetId: GLOBAL_SHEET_ID 
+          }),
+        })
+      ]);
     } catch (gasError) {
-      console.error('GAS Error (non-blocking):', gasError);
+      console.error('GAS Synchronization Error (non-blocking):', gasError);
     }
 
     return NextResponse.json({ success: true, message: "Gửi thông tin thành công." });

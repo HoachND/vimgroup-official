@@ -1,5 +1,4 @@
 "use client";
-import { I18nProvider } from "@/context/I18nContext";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Brands from "@/components/Brands";
@@ -13,20 +12,18 @@ import Widgets from "@/components/Widgets";
 
 export default function Home() {
   return (
-    <I18nProvider>
-      <main className="vim-gradient-bg text-white">
-        <Navbar />
-        <Hero />
-        <Solutions />
-        <Brands />
-        <Benefits />
-        <About />
-        <Process />
-        <ContactForm />
-        <Footer />
-        <Widgets />
-      </main>
-    </I18nProvider>
+    <main className="vim-gradient-bg text-white">
+      <Navbar />
+      <Hero />
+      <Solutions />
+      <Brands />
+      <Benefits />
+      <About />
+      <Process />
+      <ContactForm />
+      <Footer />
+      <Widgets />
+    </main>
   );
 }
 

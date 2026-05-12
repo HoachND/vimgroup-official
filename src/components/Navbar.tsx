@@ -2,13 +2,17 @@
 
 import { useI18n } from "@/context/I18nContext";
 import { Menu, X, Phone, Globe } from "lucide-react";
-import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const { t, language, setLanguage } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isBlog = pathname?.includes("/blog");
+  const effectiveScrolled = scrolled || isBlog;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -19,30 +23,30 @@ export default function Navbar() {
   const toggleLanguage = () => setLanguage(language === "vi" ? "en" : "vi");
 
   const navLinks = [
-    { name: t("nav_home"), href: "#home" },
-    { name: t("nav_solutions"), href: "#solutions" },
-    { name: t("nav_brands"), href: "#projects" },
-    { name: t("nav_benefits"), href: "#benefits" },
-    { name: t("nav_process"), href: "#process" },
+    { name: t("nav_home"), href: "/#home" },
+    { name: t("nav_solutions"), href: "/#solutions" },
+    { name: t("nav_brands"), href: "/#projects" },
+    { name: t("nav_benefits"), href: "/#benefits" },
+    { name: t("nav_process"), href: "/#process" },
     { name: "Blog", href: "/blog" },
-    { name: t("nav_quote"), href: "#contact" },
+    { name: t("nav_quote"), href: "/#contact" },
   ];
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${
-      scrolled ? "bg-white shadow-lg py-1.5" : "bg-transparent py-3.5"
+      effectiveScrolled ? "bg-white shadow-lg py-1.5" : "bg-transparent py-3.5"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
-            <a href="#home" className="hover:opacity-80 transition-opacity">
+            <a href="/#home" className="hover:opacity-80 transition-opacity">
               <Image
                 src="/images/logo-vimgroup.png"
                 alt="VIMGROUP"
                 width={1200}
                 height={400}
                 className={`w-auto object-contain transition-all duration-500 ${
-                  scrolled ? "h-14 md:h-18" : "h-20 md:h-24 lg:h-28"
+                  effectiveScrolled ? "h-14 md:h-18" : "h-20 md:h-24 lg:h-28"
                 }`}
                 priority
               />
@@ -52,11 +56,11 @@ export default function Navbar() {
           {/* Desktop */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a key={link.href + link.name} href={link.href} className={`${scrolled ? "text-gray-900" : "text-white"} hover:text-red-600 transition-colors font-bold text-sm tracking-wide uppercase`}>
+              <a key={link.href + link.name} href={link.href} className={`${effectiveScrolled ? "text-gray-900" : "text-white"} hover:text-red-600 transition-colors font-bold text-sm tracking-wide uppercase`}>
                 {link.name}
               </a>
             ))}
-            <button onClick={toggleLanguage} className={`flex items-center gap-1 ${scrolled ? "text-red-600 bg-red-600/5" : "text-white bg-white/10"} hover:bg-red-600/20 px-3 py-1.5 rounded-full transition-all border border-red-600/10`}>
+            <button onClick={toggleLanguage} className={`flex items-center gap-1 ${effectiveScrolled ? "text-red-600 bg-red-600/5" : "text-white bg-white/10"} hover:bg-red-600/20 px-3 py-1.5 rounded-full transition-all border border-red-600/10`}>
               <Globe size={16} />
               <span className="font-bold text-sm">{language.toUpperCase()}</span>
             </button>
@@ -68,11 +72,11 @@ export default function Navbar() {
 
           {/* Mobile */}
           <div className="lg:hidden flex items-center gap-4">
-            <button onClick={toggleLanguage} className={`${scrolled ? "text-red-600" : "text-white"}`}><Globe size={20} /></button>
+            <button onClick={toggleLanguage} className={`${effectiveScrolled ? "text-red-600" : "text-white"}`}><Globe size={20} /></button>
             <a href="tel:0986969339" className="flex items-center gap-1 bg-red-600 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md">
               <Phone size={16} fill="currentColor" /><span>{t("nav_call")}</span>
             </a>
-            <button onClick={() => setIsOpen(!isOpen)} className={`${scrolled ? "text-gray-900" : "text-white"}`}>{isOpen ? <X size={32} /> : <Menu size={32} />}</button>
+            <button onClick={() => setIsOpen(!isOpen)} className={`${effectiveScrolled ? "text-gray-900" : "text-white"}`}>{isOpen ? <X size={32} /> : <Menu size={32} />}</button>
           </div>
         </div>
       </div>

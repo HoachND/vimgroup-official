@@ -13,8 +13,9 @@ function getPost(slug: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getPost(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const post = getPost(resolvedParams.slug);
   if (!post) return { title: "Not Found" };
 
   // SỬ DỤNG FIELD SEO RIÊNG BIỆT NHƯ BẠN SẾP TƯ VẤN
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: post.seoTitle || post.titleVi,
       description: post.seoDescription || post.excerptVi,
-      images: [post.seoImage || "/images/banner-vimsolar.png"],
+      images: [post.seoImage || "/images/vimgroup-ecosystem.jpg"],
       type: "article",
       publishedTime: post.createdAt,
       authors: [post.author],
@@ -33,13 +34,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       card: "summary_large_image",
       title: post.seoTitle || post.titleVi,
       description: post.seoDescription || post.excerptVi,
-      images: [post.seoImage || "/images/banner-vimsolar.png"],
+      images: [post.seoImage || "/images/vimgroup-ecosystem.jpg"],
     },
   };
 }
 
-export default function BlogDetailPage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
+export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const post = getPost(resolvedParams.slug);
   if (!post) return <div>Post not found</div>;
 
   return (
@@ -54,17 +56,17 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": post.titleVi,
-            "image": post.seoImage || "/images/banner-vimsolar.png",
+            "image": post.seoImage || "/images/vimgroup-ecosystem.jpg",
             "author": {
               "@type": "Organization",
-              "name": "VimSolar"
+              "name": "VIMGROUP"
             },
             "publisher": {
               "@type": "Organization",
-              "name": "VimSolar",
+              "name": "VIMGROUP",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://solar.vimgroup.vn/images/logo-vimsolar-nobg.png"
+                "url": "https://vimgroup.vn/images/logo-vimgroup.png"
               }
             },
             "datePublished": post.createdAt,
