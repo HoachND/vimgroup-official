@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Chatbot from "../components/Chatbot";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vimgroup.vn"),
   title: "VIMGROUP - Kiến Tạo Nền Tảng, Dẫn Dắt Tương Lai",
   description: "VIMGROUP là tập đoàn đầu tư đa ngành hàng đầu, kiến tạo hệ sinh thái toàn diện từ Công nghiệp phụ trợ, Năng lượng xanh, Thương mại đến Công nghệ AI & Tự động hóa.",
-  keywords: "VIMGROUP, tập đoàn VIMGROUP, đầu tư đa ngành, công nghiệp phụ trợ, năng lượng xanh, VimSolar, VimSupply, VimAI, AI Homes, tự động hóa, chuyển đổi số",
+  keywords: "VIMGROUP, tập đoàn VIMGROUP, đầu tư đa ngành, công nghiệp phụ trợ, năng lượng xanh, VimSolar, VimSupply, ván ép Plywood, VimAI, AI Homes, tự động hóa, chuyển đổi số",
   openGraph: {
     title: "VIMGROUP - Kiến Tạo Nền Tảng, Dẫn Dắt Tương Lai",
     description: "Khám phá hệ sinh thái đa ngành của VIMGROUP: Công nghiệp, Năng lượng, Thương mại và Công nghệ đỉnh cao.",
@@ -41,6 +42,7 @@ export default function RootLayout({
       </head>
       <body className="bg-white text-slate-900 antialiased overflow-x-hidden">
         {children}
+        <Chatbot />
       </body>
     </html>
   );

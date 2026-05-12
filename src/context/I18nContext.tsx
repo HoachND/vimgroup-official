@@ -13,7 +13,7 @@ const translations: Record<string, Record<string, string>> = {
   nav_call: { vi: "Gọi ngay", en: "Call Now" },
 
   // Hero
-  hero_badge: { vi: "🏢 Tập đoàn đầu tư đa ngành VIMGROUP", en: "🏢 VIMGROUP Diversified Investment Group 2026" },
+  hero_badge: { vi: "🏢 Tập đoàn đầu tư đa ngành VIMGROUP", en: "🏢 VIMGROUP Diversified Investment Group" },
   hero_title_1: { vi: "Kiến Tạo", en: "Building" },
   hero_title_2: { vi: "Nền Tảng", en: "Foundation" },
   hero_title_3: { vi: "Dẫn Dắt Tương Lai", en: "Leading The Future" },
